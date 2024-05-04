@@ -4,7 +4,7 @@
   role="region"
   aria-label="Detalhes do livro"
   class="info-card">
-    <h2 [attr.aria-label]="'Título do livro' + livro.title">{{ livro.title | slice:0:30 }}</h2>
+    <h2 [attr.aria-label]="'Titulo do livro' + livro.title">{{ livro.title | slice:0:30 }}</h2>
     <dl>
       <dt class="informacoes">Autoria:</dt>
       <dd class="resultado">{{ livro.authors ? (livro.authors | autoria | slice:0:20) : ''  }}</dd>
