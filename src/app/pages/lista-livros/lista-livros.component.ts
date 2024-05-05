@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HttpClientModule } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,7 +31,10 @@ export class ListaLivrosComponent implements AfterViewInit{
   livrosResultado!: LivrosResultado;
   @ViewChild('campoBuscaElement') campoBuscaElement!: ElementRef;
 
-  constructor(private service: LivroService) { }
+  constructor(
+    private service: LivroService,
+    private liveAnnouncer: LiveAnnouncer
+  ) { }
 
   ngAfterViewInit() {
     this.campoBuscaElement.nativeElement.focus();
@@ -49,6 +53,7 @@ export class ListaLivrosComponent implements AfterViewInit{
     }),
     tap((resultado) => {
       this.livrosResultado = resultado;
+      this.liveAnnouncer.announce(`${this.livrosResultado.totalItems} resultados encontrados`)
     }),
     map((resultado) => resultado.items ?? []),
     map((items) => this.livrosResultadoParaLivros(items)),
